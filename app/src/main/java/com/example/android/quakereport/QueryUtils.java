@@ -34,7 +34,7 @@ public class QueryUtils {
     private QueryUtils() {
     }
 
-    /*
+    /**
      * Return a list of {@link QuakeItem} objects that has been built up from
      * parsing a JSON response.
      */
@@ -58,7 +58,7 @@ public class QueryUtils {
                 JSONObject properties = earthquake.getJSONObject("properties");
                 String magnitude = properties.getString("mag");
                 String place = properties.getString("place");
-                String time = properties.getString("time");
+                long time = properties.getLong("time");
 
                 earthquakes.add(new QuakeItem(magnitude, place, time));
 

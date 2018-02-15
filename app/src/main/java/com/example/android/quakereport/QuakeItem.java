@@ -8,12 +8,12 @@ public class QuakeItem {
 
     private String mMagnitude;
     private String mArea;
-    private String mDate;
+    private long mTimeInMilliseconds;
 
-    public QuakeItem(String magnitude, String area, String date){
+    public QuakeItem(String magnitude, String area, long timeInMillisecond){
         this.mMagnitude = magnitude;
         this.mArea = area;
-        this.mDate = date;
+        this.mTimeInMilliseconds = timeInMillisecond;
     }
 
     public String getMagnitude(){
@@ -22,7 +22,7 @@ public class QuakeItem {
     public String getArea(){
         return mArea;
     }
-    public String getDate(){
-        return mDate;
+    public long getTimeInMilliseconds(){
+        return mTimeInMilliseconds;
     }
 }
