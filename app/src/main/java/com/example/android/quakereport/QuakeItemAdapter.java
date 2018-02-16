@@ -38,8 +38,12 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
         TextView magnitudeTextView = listQuakeItemView.findViewById(R.id.magnitude_text_field);
         magnitudeTextView.setText(currentEarthquake.getMagnitude());//find and display the magnitude
 
-        TextView areaTextView = listQuakeItemView.findViewById(R.id.area_text_field);
-        areaTextView.setText(currentEarthquake.getArea());//find and display the place
+        currentEarthquake.splitLocation();
+        TextView locationOffsetTextView = listQuakeItemView.findViewById(R.id.location_offset);
+        locationOffsetTextView.setText(currentEarthquake.getLocationOffset());//find and display the location offset
+
+        TextView primaryLocationTextView = listQuakeItemView.findViewById(R.id.primary_location);
+        primaryLocationTextView.setText(currentEarthquake.getPrimaryLocation());//find and display the primary location
 
         // create human readable formate for date and then display it
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
