@@ -51,7 +51,7 @@ public class EarthquakeActivity extends AppCompatActivity {
                 String url = clickedEarthQuake.getUrl();
 
                 //Implicit intent that contains a url to got
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(Intent.ACTION_VIEW); // ACTION_VIEW is used to open Web browser
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
             }

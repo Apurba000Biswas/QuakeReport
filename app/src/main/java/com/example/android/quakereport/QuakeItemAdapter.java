@@ -47,7 +47,6 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
      */
     private void setAllViews(QuakeItem currentEarthquake, View listQuakeItemView){
 
-
         //find and Set the magnitude
         // Set the proper background color on the magnitude circle.
         // Fetch the background from the TextView, which is a GradientDrawable.
@@ -74,6 +73,9 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
         setATextView((TextView) listQuakeItemView.findViewById(R.id.time), formatTime(dateObject));
     }
 
+    /**
+     * Returns the approriate color for Magnitude text field
+     */
     private int getMagnitudeColor(double magnitude){
         int magnitudeColorResourceId;
         int magnitudeFloor = (int) Math.floor(magnitude);
