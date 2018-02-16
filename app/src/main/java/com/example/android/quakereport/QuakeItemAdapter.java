@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
 
+    //Constructor
     public QuakeItemAdapter(Activity context, ArrayList<QuakeItem> quakeItems){
         super(context, 0, quakeItems);
     }
@@ -32,33 +34,47 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
             listQuakeItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_quake_item, parent, false);
         }
-
         QuakeItem currentEarthquake = getItem(position);//get the current item to create view
+        setAllViews(currentEarthquake, listQuakeItemView);
+        return listQuakeItemView;
+    }
+    /**
+     * Sets all views in the current position of the list view with
+     * formated views
+     *
+     */
+    private void setAllViews(QuakeItem currentEarthquake, View listQuakeItemView){
+        //find and Set the magnitude
+        setATextView((TextView) listQuakeItemView.findViewById(R.id.magnitude_text_field), formatedMagnitude(currentEarthquake.getMagnitude()));
 
-        TextView magnitudeTextView = listQuakeItemView.findViewById(R.id.magnitude_text_field);
-        magnitudeTextView.setText(currentEarthquake.getMagnitude());//find and display the magnitude
-
+        //find and set the location offset
         currentEarthquake.splitLocation();
-        TextView locationOffsetTextView = listQuakeItemView.findViewById(R.id.location_offset);
-        locationOffsetTextView.setText(currentEarthquake.getLocationOffset());//find and display the location offset
+        setATextView((TextView) listQuakeItemView.findViewById(R.id.location_offset), currentEarthquake.getLocationOffset());
 
-        TextView primaryLocationTextView = listQuakeItemView.findViewById(R.id.primary_location);
-        primaryLocationTextView.setText(currentEarthquake.getPrimaryLocation());//find and display the primary location
+        //find and set the primary location
+        setATextView((TextView) listQuakeItemView.findViewById(R.id.primary_location), currentEarthquake.getPrimaryLocation());
 
         // create human readable formate for date and then display it
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
-        String formattedDate = formatDate(dateObject);
-        TextView dateTextView = listQuakeItemView.findViewById(R.id.date_text_field);
-        dateTextView.setText(formattedDate);
+        setATextView((TextView) listQuakeItemView.findViewById(R.id.date_text_field), formatDate(dateObject));
 
         //create human readable formate for time and then display it
-        TextView timeTextView = listQuakeItemView.findViewById(R.id.time);
-        String formattedTime = formatTime(dateObject);
-        timeTextView.setText(formattedTime);
-
-        return listQuakeItemView;
+        setATextView((TextView) listQuakeItemView.findViewById(R.id.time), formatTime(dateObject));
     }
-
+    /**
+     * Set the Specified Text view with a given text
+     */
+    private void setATextView(TextView textView, String text){
+        textView.setText(text);
+    }
+    /**
+     * Return the formatted magnitude string showing 1 decimal place (i.e. "3.2")
+     * from a decimal magnitude value.
+     */
+    private String formatedMagnitude(double mag){
+        DecimalFormat decimalFormatter = new DecimalFormat("0.0");
+        return decimalFormatter.format(mag);
+    }
     /**
      * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
      */
@@ -73,5 +89,4 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
         return timeFormat.format(dateObject);
     }
-
 }

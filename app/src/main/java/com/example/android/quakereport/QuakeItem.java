@@ -5,22 +5,24 @@ package com.example.android.quakereport;
  */
 
 
+import android.content.res.Resources;
+
 public class QuakeItem {
     private static final String LOCATION_SEPARATOR = " of ";
 
-    private String mMagnitude;
+    private double mMagnitude;
     private String mLocation;
     private String locationOffset;
     private String primaryLocation;
     private long mTimeInMilliseconds;
 
-    public QuakeItem(String magnitude, String location, long timeInMillisecond){
+    public QuakeItem(double magnitude, String location, long timeInMillisecond){
         this.mMagnitude = magnitude;
         this.mTimeInMilliseconds = timeInMillisecond;
         this.mLocation = location;
     }
 
-    public String getMagnitude(){
+    public double getMagnitude(){
         return mMagnitude;
     }
     public long getTimeInMilliseconds(){
