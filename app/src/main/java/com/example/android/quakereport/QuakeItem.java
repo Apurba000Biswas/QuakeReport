@@ -14,12 +14,14 @@ public class QuakeItem {
     private String mLocation;
     private String locationOffset;
     private String primaryLocation;
+    private String mUrl;
     private long mTimeInMilliseconds;
 
-    public QuakeItem(double magnitude, String location, long timeInMillisecond){
+    public QuakeItem(double magnitude, String location, long timeInMillisecond, String url){
         this.mMagnitude = magnitude;
         this.mTimeInMilliseconds = timeInMillisecond;
         this.mLocation = location;
+        this.mUrl = url;
     }
 
     public double getMagnitude(){
@@ -33,6 +35,9 @@ public class QuakeItem {
     }
     public String getPrimaryLocation(){
         return primaryLocation;
+    }
+    public String getUrl(){
+        return mUrl;
     }
 
     /**
