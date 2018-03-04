@@ -19,11 +19,12 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
 
     //Constructor
-    public QuakeItemAdapter(Activity context, ArrayList<QuakeItem> quakeItems){
+    public QuakeItemAdapter(Activity context, List<QuakeItem> quakeItems){
         super(context, 0, quakeItems);
     }
 

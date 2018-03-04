@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QueryUtils {
 
@@ -39,10 +40,10 @@ public class QueryUtils {
      * Return a list of {@link QuakeItem} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<QuakeItem> extractEarthquakes() {
+    public static List<QuakeItem> extractEarthquakes() {
 
         // Create an empty ArrayList that we can start adding earthquakes to
-        ArrayList<QuakeItem> earthquakes = new ArrayList<>();
+        List<QuakeItem> earthquakes = new ArrayList<>();
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
