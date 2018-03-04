@@ -52,8 +52,10 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
         // Fetch the background from the TextView, which is a GradientDrawable.
         TextView magnitudeView = listQuakeItemView.findViewById(R.id.magnitude_text_field);
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
+
         // Get the appropriate background color based on the current earthquake magnitude
         int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
         setATextView(magnitudeView, formatedMagnitude(currentEarthquake.getMagnitude()));
