@@ -5,8 +5,6 @@ package com.example.android.quakereport;
  */
 
 
-import android.content.res.Resources;
-
 public class QuakeItem {
     private static final String LOCATION_SEPARATOR = " of ";
 

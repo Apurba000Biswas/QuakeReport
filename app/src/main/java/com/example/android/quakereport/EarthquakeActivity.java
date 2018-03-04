@@ -30,60 +30,27 @@ public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     /** URL for earthquake data from the USGS dataset */
-    private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=20";
+    QuakeItemAdapter mAdapter;
+
+    /*------------------------------------------------------------------Methods---------------------------------------------------------------------**/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        EarthQuakeAsyncTask task = new EarthQuakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
-    }
+        final List<QuakeItem> earthquakes =  new ArrayList<QuakeItem>();
 
-    private class EarthQuakeAsyncTask extends AsyncTask<String, Void, List<QuakeItem>> {
-
-        @Override
-        protected List<QuakeItem> doInBackground(String... urls) {
-            // Don't perform the request if there are no URLs, or the first URL is null.
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-
-            // Perform the HTTP request for earthquake data and process the response.
-            List<QuakeItem> earthquakeData = QueryUtils.extractEarthquakes();
-            return earthquakeData;
-        }
-
-        @Override
-        protected void onPostExecute(List<QuakeItem> earthquakeData) {
-            // If there is no result, do nothing.
-            if (earthquakeData.get(0) == null) {
-                return;
-            }
-
-            updateUi(earthquakeData);
-        }
-    }
-
-    private void updateUi(List<QuakeItem> earthquakeData){
-        // Create a list of earthquake locations.
-        final List<QuakeItem> earthquakes =  earthquakeData;
-
-        // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
-        QuakeItemAdapter adapter = new QuakeItemAdapter(this, earthquakes);
-        earthquakeListView.setAdapter(adapter); //Adapter sets here
+        mAdapter = new QuakeItemAdapter(this, earthquakes);
+        earthquakeListView.setAdapter(mAdapter);
 
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 QuakeItem clickedEarthQuake = earthquakes.get(i);
-
                 String url = clickedEarthQuake.getUrl();
 
                 //Implicit intent that contains a url to got
@@ -92,5 +59,30 @@ public class EarthquakeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        EarthQuakeAsyncTask task = new EarthQuakeAsyncTask();
+        task.execute(USGS_REQUEST_URL);
     }
+    /*-----------------------------------------------------------------Inner class-------------------------------------------------------------------**/
+    private class EarthQuakeAsyncTask extends AsyncTask<String, Void, List<QuakeItem>> {
+
+        @Override
+        protected List<QuakeItem> doInBackground(String... urls) {
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+            List<QuakeItem> earthquakeData = QueryUtils.fetchEarthquakeData(urls[0]);
+            return earthquakeData;
+        }
+
+        @Override
+        protected void onPostExecute(List<QuakeItem> earthquakeData) {
+            mAdapter.clear();
+            if (earthquakeData != null && !earthquakeData.isEmpty()) {
+                mAdapter.addAll(earthquakeData);
+            }
+        }
+    }
+    /*-----------------------------------------------------------------------------------------------------------------------------------------------**/
+
 }
