@@ -5,9 +5,7 @@ This app displays a list of recent earthquakes in the world
 from the U.S. Geological Survey (USGS) organization.
 
 Used in a Udacity course in the Beginning Android Nanodegree.
-And modified for practise purpose to be used some component of 
-the app to "Disaster Report" app which is BSC engineering 
-final project in Bangladesh University of Business and Technology(BUBT).
+And modified for practise purpose  and to be used its some component to "Disaster Report" app which is the final project of BSC engineering in Bangladesh University of Business and Technology(BUBT), Intake-(23,27).
 
 More info on the USGS Earthquake API available at:
 https://earthquake.usgs.gov/fdsnws/event/1/
