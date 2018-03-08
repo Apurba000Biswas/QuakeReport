@@ -10,6 +10,10 @@ And modified for practise purpose  and to be used its some component to "Disaste
 More info on the USGS Earthquake API available at:
 https://earthquake.usgs.gov/fdsnws/event/1/
 
+App preview
+-------------
+https://www.dropbox.com/s/88jujugxgboexv1/Eart%20Quake%20Report%20preview.mp4?dl=0
+
 Pre-requisites
 --------------
 
