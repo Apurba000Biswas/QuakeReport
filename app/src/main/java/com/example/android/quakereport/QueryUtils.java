@@ -28,8 +28,17 @@ public class QueryUtils {
 
     private QueryUtils() {
     }
+    /*------------------------------------------------------------------Methods---------------------------------------------------------------------**/
 
     public static List<QuakeItem> fetchEarthquakeData(String requestUrl) {
+        Log.i(LOG_TAG, "TEST: called fetchEarthquakeData() ");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         URL url = createUrl(requestUrl);
         String jsonResponse = null;
         try {

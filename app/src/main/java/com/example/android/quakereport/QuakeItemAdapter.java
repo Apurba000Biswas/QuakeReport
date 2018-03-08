@@ -27,7 +27,7 @@ public class QuakeItemAdapter extends ArrayAdapter<QuakeItem>{
     public QuakeItemAdapter(Activity context, List<QuakeItem> quakeItems){
         super(context, 0, quakeItems);
     }
-
+    /*------------------------------------------------------------------Methods---------------------------------------------------------------------**/
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

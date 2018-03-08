@@ -21,7 +21,7 @@ public class QuakeItem {
         this.mLocation = location;
         this.mUrl = url;
     }
-
+    /*------------------------------------------------------------------Methods---------------------------------------------------------------------**/
     public double getMagnitude(){
         return mMagnitude;
     }
